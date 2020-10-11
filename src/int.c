@@ -17,7 +17,7 @@ int *decimalBinary(int num)
 {
         int bin[32];
         int cnt = 0;
-        while(num > 0) {
+        while (num > 0) {
                 bin[cnt] = num % 2;
                 num = num / 2;
                 cnt++;
@@ -29,7 +29,7 @@ int *decimalOctal(int num)
 {
 	int oct[32];
         int cnt = 0;
-	while(num > 0) {
+	while (num > 0) {
 		oct[cnt] = num % 8;
 		num = num / 8;
 		cnt++;
@@ -69,7 +69,7 @@ int binaryDecimal(int bin[])
         int cnt = 0;
         int dec = 0;
         int i;
-        for(i = (strlen(bin)-1); i >= 0; i--) {
+        for (i = (strlen(bin)-1); i >= 0; i--) {
                 dec = dec + (bin[i] - 0x30) * pow((double)2, (double)cnt);
                 cnt++;
         }
