@@ -1,5 +1,6 @@
 CC        = gcc
 CFLAGS    = -Iinclude -std=c89 -Wall -Wextra -pedantic-errors
+LDFLAGS   = -lm
 
 Q         = @
 
@@ -25,4 +26,4 @@ clean:
 
 %.o: %.c
 	$(Q) echo [Compile] $<
-	$(Q) $(CC) -c $< -o $@ $(CFLAGS)
+	$(Q) $(CC) -c $< -o $@ $(CFLAGS) $(LDFLAGS)
