@@ -6,14 +6,14 @@ extern "C" {
 #endif
 
 int digitSum(int num);
-  
-int *decimalBinary(int num);
-int *decimalOctal(int num);
-char *decimalHexademical(int num);
 
-int binaryDecimal(int bin[]);
-int octalDecimal(int oct[]);
-int hexademical(char hex[]);
+char *decimalBinary(int num);
+char *decimalOctal(int num);
+char *decimalHexadecimal(int num);
+
+int binaryDecimal(char *bin);
+int octalDecimal(char *oct);
+int hexadecimalDecimal(char *hex);
 
 #ifdef __cplusplus
 }

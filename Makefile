@@ -18,7 +18,7 @@ libint.a: $(OBJS)
 
 test: test/main.c
 	$(Q) echo [Compile] $<
-	$(Q) $(CC) $< -o main $(CFLAGS) -lint -L. -Iinclude
+	$(Q) $(CC) $< -o main $(CFLAGS) -lint -L. -Iinclude $(LDFLAGS)
 	$(Q) echo done
 
 clean:
@@ -26,4 +26,4 @@ clean:
 
 %.o: %.c
 	$(Q) echo [Compile] $<
-	$(Q) $(CC) -c $< -o $@ $(CFLAGS) $(LDFLAGS)
+	$(Q) $(CC) -c $< -o $@ $(CFLAGS)
