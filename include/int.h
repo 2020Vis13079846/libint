@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 int digitSum(int num);
-int numberSystem(usigned int num, unsigned int radix);
+int decimalBinary(int num);
 
 #ifdef __cplusplus
 }
