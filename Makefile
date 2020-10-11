@@ -3,7 +3,7 @@ CFLAGS    = -Iinclude -std=c89 -Wall -Wextra -pedantic-errors
 
 Q         = @
 
-SRCS      := src/int.cpp
+SRCS      := src/int.c
 OBJS       = $(patsubst %.c, %.o, $(SRCS))
 
 .PHONY: all test clean
@@ -15,7 +15,7 @@ libint.a: $(OBJS)
 	$(Q) $(AR) rcs $@ $(OBJS)
 	$(Q) echo done
 
-test: test/main.cpp
+test: test/main.c
 	$(Q) echo [Compile] $<
 	$(Q) $(CC) $< -o main $(CFLAGS) -lint -L. -Iinclude
 	$(Q) echo done
