@@ -15,7 +15,7 @@ libint.a: $(OBJS)
 	$(Q) $(AR) rcs $@ $(OBJS)
 	$(Q) echo done
 
-test: test/main.c
+test: test/main.cpp
 	$(Q) echo [Compile] $<
 	$(Q) $(CC) $< -o main $(CFLAGS) -lint -L. -Iinclude
 	$(Q) echo done
