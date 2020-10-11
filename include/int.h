@@ -1,11 +1,11 @@
-#ifndef _HELLO_H_
-#define _HELLO_H_ 1
+#ifndef _INT_H_
+#define _INT_H_ 1
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void hello();
+int digitSum(int num);
 
 #ifdef __cplusplus
 }
