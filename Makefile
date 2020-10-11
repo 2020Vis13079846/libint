@@ -4,7 +4,7 @@ LDFLAGS   = -lm
 
 Q         = @
 
-SRCS      := src/int.c
+SRCS      := $(shell find -name "*.c" -print -type f)
 OBJS       = $(patsubst %.c, %.o, $(SRCS))
 
 .PHONY: all test clean
