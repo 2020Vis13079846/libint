@@ -1,6 +1,13 @@
 #include <stdio.h>
-#include "hello.h"
+#include "int.h"
 
-void hello() {
-    printf("Hello, library world!\n");
+int digitSum(int num) 
+{
+        int digit, sum;
+        while (n > 0) {
+                digit = num % 10;
+                sum += digit;
+                num /= 10;
+        }
+        return sum;
 }
