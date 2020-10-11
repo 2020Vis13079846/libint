@@ -1,119 +1,80 @@
 #include <stdio.h>
-#include <math.h>
 #include <string.h>
+#include <stdlib.h>
+#include <math.h>
 #include "int.h"
 
-int digitSum(int num) 
+int digitSum(int num)
 {
-        int digit, sum;
-        while (num > 0) {
-                digit = num % 10;
-                sum += digit;
-                num /= 10;
-        }
-        return sum;
-}
-
-int *decimalBinary(int num)
-{
-        int bin[32];
-        int cnt = 0;
-        while (num > 0) {
-                bin[cnt] = num % 2;
-                num = num / 2;
-                cnt++;
-        }
-        return bin;
-}
-
-int *decimalOctal(int num)
-{
-	int oct[32];
-        int cnt = 0;
-	while (num > 0) {
-		oct[cnt] = num % 8;
-		num = num / 8;
-		cnt++;
+	int sum = 0, sign = num < 0;
+	num = abs(num);
+	while (num > 0)
+	{
+		sum += num % 10;
+		num /= 10;
 	}
-        return oct;
+	return sum * (sign ? -1 : 1);
 }
 
-char *decimalHexademical(int num)
+char *itoa(int num, int radix)
 {
-	char hex[32];
-	int cnt = 0;
-	while (num > 0) {
-		switch(num % 16) {
-			case 10:
-				hex[cnt] = 'A'; break;
-			case 11:
-				hex[cnt] = 'B'; break;
-			case 12:
-				hex[cnt] = 'C'; break;
-			case 13:
-				hex[cnt] = 'D'; break;
-			case 14:
-				hex[cnt] = 'E'; break;
-			case 15:
-				hex[cnt] = 'F'; break;
-			default:
-				hex[cnt] = (num % 16) + 0x30;
-		}
-		num = num / 16;
-		cnt++;
+	char *alphabet = "0123456789ABCDEF";
+	char *number = (char *)malloc(sizeof(char)*32), swap;
+	int cnt = 0, sign = num < 0;
+	int start, end;
+	num = abs(num);
+	while (num > 0)
+	{
+		number[cnt++] = alphabet[num % radix];
+		num /= radix;
 	}
-        return hex;
-}
-
-int binaryDecimal(int bin[])
-{
-        int cnt = 0;
-        int dec = 0;
-        int i;
-        for (i = (strlen(bin)-1); i >= 0; i--) {
-                dec = dec + (bin[i] - 0x30) * pow((double)2, (double)cnt);
-                cnt++;
-        }
- 
-        return dec;
-}
-
-int octalDecimal(int oct[])
-{
-	int cnt = 0;
-	int dec = 0;
-        int i;
-	for (i = (strlen(oct) - 1); i >= 0; i--) {
-		dec = dec+ (oct[i] - 0x30) * pow((double)8, (double)cnt);
-		cnt++;
+	(sign ? number[cnt]='-' : cnt--);
+	for (start = 0, end = cnt; start < end; start++, end--)
+	{
+		swap = number[start];
+		number[start] = number[end];
+		number[end] = swap;
 	}
-        return dec;
+	return number;
 }
 
-int hexademicalDecimal(char hex[])
+char *decimalBinary(int num)
 {
-        int cnt = 0;
-        int dec = 0;
-        int dig, i;
-        for (i = (strlen(hex)-1); i >= 0; i--) {
-                switch(hex[i]) {
-                        case 'A':
-                                dig = 10; break;
-                        case 'B':
-                                dig = 11; break;
-                        case 'C':
-                                dig = 12; break;
-                        case 'D':
-                                dig = 13; break;
-                        case 'E':
-                                dig = 14; break;
-                        case 'F':
-                                dig = 15; break;
-                        default:
-                                dig = hex[i] - 0x30;
-                }
-                dec = dec + (dig) * pow((double)16, (double)cnt);
-                cnt++;
-        }
-        return dec;
+	return itoa(num, 2);
+}
+
+char *decimalOctal(int num)
+{
+	return itoa(num, 8);
+}
+
+char *decimalHexadecimal(int num)
+{
+	return itoa(num, 16);
+}
+
+int numberDecimal(char *number, int radix)
+{
+	int sign = number[0] == '-';
+	int stop = sign, num = 0, i, cnt;
+	for (cnt = 0, i = strlen(number)-1; i >= stop; i--)
+	{
+		num += (number[i] >= '0' ? number[i]-'0' : number[i]-'A'+10) * pow(radix, cnt++);
+	}
+	return (sign ? -1 : 1) * num;
+}
+
+int binaryDecimal(char *bin)
+{
+	return numberDecimal(bin, 2);
+}
+
+int octalDecimal(char *oct)
+{
+	return numberDecimal(oct, 8);
+}
+
+int hexadecimalDecimal(char *hex)
+{
+	return numberDecimal(hex, 16);
 }
