@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "int.hpp"
+#include "int.h"
 
 int main(void) {
     printf("%d", digitSum(123));
