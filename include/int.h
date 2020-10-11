@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 int digitSum(int num);
+int numberSystem(usigned int num, unsigned int radix);
 
 #ifdef __cplusplus
 }
